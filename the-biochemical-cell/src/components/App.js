@@ -5,17 +5,19 @@ import Signout from "./auth/Signout";
 import Signin from "./auth/Signin";
 import Signup from "./auth/Signup";
 import HomePage from "./pages/HomePage";
+import SourcePage from "./pages/SourcePage";
 import Header from "./Header";
 
 const App = () => {
   return (
-    <div className="container">
+    <div>
       <Router history={history}>
         <div>
           <Header />
           <Switch>
             <Route path="/" exact component={Signup} />
             <Route path="/homepage" exact component={HomePage} />
+            <Route path="/sources" exact component={SourcePage} />
             <Route path="/signout" exact component={Signout} />
             <Route path="/signin" exact component={Signin} />
           </Switch>

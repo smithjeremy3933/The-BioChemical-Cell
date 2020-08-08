@@ -18,6 +18,7 @@ class Signup extends React.Component {
             {...input}
             autoComplete="off"
             type={type}
+            className="input is-medium"
             label="Enter Email for Username"
           />
         </div>
@@ -28,22 +29,34 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <Field
-          name="username"
-          component={this.renderInput}
-          label="Enter Email for Username"
-        />
-        <Field
-          name="password"
-          type="password"
-          component={this.renderInput}
-          label="Enter a valid Password."
-        />
-        <div className="control">
-          <button className="button is-link">Submit</button>
+      <div className="container">
+        <div className="box" style={{ marginTop: 100, height: 500 }}>
+          <h1>
+            <b style={{ fontSize: 50 }}>
+              Sign Up to Learn all about BioChemistry!
+            </b>
+          </h1>
+          <hr />
+          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <Field
+              name="username"
+              component={this.renderInput}
+              label="Enter Email for Username"
+            />
+            <Field
+              name="password"
+              type="password"
+              component={this.renderInput}
+              label="Enter a valid Password."
+            />
+            <div className="control">
+              <button className="button is-link" style={{ width: 200 }}>
+                Sign Up
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     );
   }
 }

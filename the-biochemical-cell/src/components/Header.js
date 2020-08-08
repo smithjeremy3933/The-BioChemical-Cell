@@ -3,21 +3,86 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 class Header extends React.Component {
+  renderAuthBtns() {
+    if (this.props.authenticated) {
+      return (
+        <div className="button">
+          <Link to="/signout" className="button is-primary">
+            <strong>Sign Out</strong>
+          </Link>
+        </div>
+      );
+    } else {
+      return (
+        <div className="buttons">
+          <Link to="/" className="button is-primary">
+            <strong>Sign up</strong>
+          </Link>
+          <Link to="/signin" className="button is-light">
+            Sign in
+          </Link>
+        </div>
+      );
+    }
+  }
+
+  renderLinks() {
+    if (this.props.authenticated) {
+      return (
+        <div className="navbar-start">
+          <Link to="/homepage" className="navbar-item">
+            Home
+          </Link>
+          <Link to="/sources" className="navbar-item">
+            Sources
+          </Link>
+          <div className="navbar-item has-dropdown is-hoverable">
+            <a className="navbar-link">More</a>
+            <div className="navbar-dropdown">
+              <a className="navbar-item">About</a>
+              <a className="navbar-item">Jobs</a>
+              <a className="navbar-item">Contact</a>
+              <hr className="navbar-divider" />
+              <a className="navbar-item">Report an issue</a>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="navbar-start">
+          <Link to="/sources" className="navbar-item">
+            Sources
+          </Link>
+          <div className="navbar-item has-dropdown is-hoverable">
+            <a className="navbar-link">More</a>
+            <div className="navbar-dropdown">
+              <a className="navbar-item">About</a>
+              <a className="navbar-item">Jobs</a>
+              <a className="navbar-item">Contact</a>
+              <hr className="navbar-divider" />
+              <a className="navbar-item">Report an issue</a>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <a className="navbar-item" href="https://bulma.io">
             <img
               src="https://bulma.io/images/bulma-logo.png"
               width="112"
               height="28"
             />
           </a>
-
           <a
             role="button"
-            class="navbar-burger burger"
+            className="navbar-burger burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -28,34 +93,10 @@ class Header extends React.Component {
           </a>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item">Home</a>
-
-            <a class="navbar-item">Documentation</a>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">More</a>
-
-              <div class="navbar-dropdown">
-                <a class="navbar-item">About</a>
-                <a class="navbar-item">Jobs</a>
-                <a class="navbar-item">Contact</a>
-                <hr class="navbar-divider" />
-                <a class="navbar-item">Report an issue</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a class="button is-light">Log in</a>
-              </div>
-            </div>
+        <div id="navbarBasicExample" className="navbar-menu">
+          {this.renderLinks()}
+          <div className="navbar-end">
+            <div className="navbar-item">{this.renderAuthBtns()}</div>
           </div>
         </div>
       </nav>
@@ -63,4 +104,8 @@ class Header extends React.Component {
   }
 }
 
-export default connect(null)(Header);
+function mapStateToProps(state) {
+  return { authenticated: state.auth.authenticated };
+}
+
+export default connect(mapStateToProps)(Header);
