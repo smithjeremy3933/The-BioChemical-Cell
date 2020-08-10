@@ -33,9 +33,6 @@ class Header extends React.Component {
           <Link to="/homepage" className="navbar-item">
             Home
           </Link>
-          <Link to="/sources" className="navbar-item">
-            Sources
-          </Link>
           <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link">More</a>
             <div className="navbar-dropdown">

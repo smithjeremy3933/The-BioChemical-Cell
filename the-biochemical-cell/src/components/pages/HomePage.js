@@ -10,7 +10,7 @@ class HomePage extends React.Component {
         <div className="column is-one-fifth">
           <SideMenu />
         </div>
-        <div className="column">Content</div>
+        <div className="column">Home Page Content</div>
       </div>
     );
   }

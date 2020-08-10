@@ -6,6 +6,7 @@ import Signin from "./auth/Signin";
 import Signup from "./auth/Signup";
 import HomePage from "./pages/HomePage";
 import SourcePage from "./pages/SourcePage";
+import AminoAcidPage from "./pages/AminoAcidPage";
 import Header from "./Header";
 
 const App = () => {
@@ -17,6 +18,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Signup} />
             <Route path="/homepage" exact component={HomePage} />
+            <Route path="/aminoacid" exact component={AminoAcidPage} />
             <Route path="/sources" exact component={SourcePage} />
             <Route path="/signout" exact component={Signout} />
             <Route path="/signin" exact component={Signin} />

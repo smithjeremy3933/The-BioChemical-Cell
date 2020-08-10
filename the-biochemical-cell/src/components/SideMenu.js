@@ -1,23 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class SideMenu extends React.Component {
   render() {
     return (
       <aside className="menu">
+        <p className="menu-label">General</p>
+        <ul className="menu-list">
+          <li>
+            <Link to="/homepage">Homepage</Link>
+          </li>
+          <li>
+            <Link to="/sources">Sources</Link>
+          </li>
+        </ul>
         <p className="menu-label">Topics</p>
         <ul className="menu-list">
           <li>
-            <a>Dashboard</a>
-          </li>
-          <li>
-            <a>Customers</a>
-          </li>
-        </ul>
-        <p className="menu-label">Administration</p>
-        <ul className="menu-list">
-          <li>
-            <a>Team Settings</a>
+            <Link to="/aminoacid">Amino Acid</Link>
           </li>
           <li>
             <a>Manage Your Team</a>

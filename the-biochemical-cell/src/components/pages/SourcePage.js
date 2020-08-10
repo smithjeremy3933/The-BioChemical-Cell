@@ -1,9 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import SideMenu from "../SideMenu";
 
 class SourcePage extends React.Component {
   render() {
-    return <div>SourcePage</div>;
+    return (
+      <div className="columns">
+        <div className="column is-one-fifth">
+          <SideMenu />
+        </div>
+        <div className="column">Source Page Content</div>
+      </div>
+    );
   }
 }
 
