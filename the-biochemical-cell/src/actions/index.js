@@ -7,7 +7,8 @@ export const signup = (formValues) => async (dispatch) => {
     await backend.post("/api/users/signup", formValues);
     history.push("/signin");
   } catch (e) {
-    dispatch({ type: AUTH_ERROR, payload: "Username is already in use." });
+    dispatch({ type: AUTH_ERROR, payload: "Invalid information." });
+    console.log(e);
   }
 };
 

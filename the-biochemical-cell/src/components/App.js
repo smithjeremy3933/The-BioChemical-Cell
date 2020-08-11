@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import SourcePage from "./pages/SourcePage";
 import AminoAcidPage from "./pages/AminoAcidPage";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/signout" exact component={Signout} />
             <Route path="/signin" exact component={Signin} />
           </Switch>
+          <Footer />
         </div>
       </Router>
     </div>

@@ -6,10 +6,52 @@ import { signup } from "../../actions";
 
 class Signup extends React.Component {
   onSubmit = (formValues) => {
-    this.props.signup(formValues);
+    return new Promise((resolve) => {
+      const trimUsername = _.trim(formValues.username);
+      const trimPassword = _.trim(formValues.password);
+
+      if (trimUsername !== formValues.username) {
+        throw new SubmissionError({
+          username: "Cannot have SPACE at beginning or end of username",
+        });
+      }
+
+      if (trimPassword !== formValues.password) {
+        throw new SubmissionError({
+          password: "Cannot have SPACE at beginning or end of password",
+        });
+      }
+
+      if (formValues.password.length < 6) {
+        throw new SubmissionError({
+          password: "Password must be at least 6 characters long.",
+        });
+      }
+
+      if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formValues.username)
+      ) {
+        throw new SubmissionError({ username: "Invalid e-mail address." });
+      }
+
+      resolve(this.props.signup(formValues));
+    });
   };
 
-  renderInput = ({ input, label, meta, type }) => {
+  renderError({ error, touched }) {
+    if (touched && error) {
+      return (
+        <div>
+          <p className="help is-danger">{error}</p>
+        </div>
+      );
+    }
+  }
+
+  renderInput = ({ input, label, meta, type, placeholder }) => {
+    const className = `input is-medium ${
+      meta.error && meta.touched ? "is-danger" : ""
+    }`;
     return (
       <div className="field">
         <label className="label">{label}</label>
@@ -18,11 +60,12 @@ class Signup extends React.Component {
             {...input}
             autoComplete="off"
             type={type}
-            className="input is-medium"
-            label="Enter Email for Username"
+            className={className}
+            label="Enter Email as your Username"
+            placeholder={placeholder}
           />
         </div>
-        <p className="help is-success">This username is available</p>
+        {this.renderError(meta)}
       </div>
     );
   };
@@ -41,13 +84,15 @@ class Signup extends React.Component {
             <Field
               name="username"
               component={this.renderInput}
-              label="Enter Email for Username"
+              label="Enter Email"
+              placeholder="example@example.com"
             />
             <Field
               name="password"
               type="password"
               component={this.renderInput}
               label="Enter a valid Password."
+              placeholder="Password"
             />
             <div className="control">
               <button className="button is-link" style={{ width: 200 }}>
@@ -61,6 +106,19 @@ class Signup extends React.Component {
   }
 }
 
-const formWrapped = reduxForm({ form: "signup" })(Signup);
+const validate = (formValues) => {
+  const errors = {};
+
+  if (!formValues.username) {
+    errors.username = "You must enter a valid email address as your username.";
+  }
+
+  if (!formValues.password) {
+    errors.password = "You must enter a password";
+  }
+  return errors;
+};
+
+const formWrapped = reduxForm({ form: "signup", validate })(Signup);
 
 export default connect(null, { signup })(formWrapped);
