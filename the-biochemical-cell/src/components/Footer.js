@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 class Footer extends React.Component {
   render() {
     return (
-      <footer class="footer">
-        <div class="content has-text-centered">
+      <footer className="footer">
+        <div className="content has-text-centered">
           <b>The BioChemical Cell. Styled with Bulma CSS</b>
         </div>
       </footer>

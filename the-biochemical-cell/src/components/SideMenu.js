@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { SideMenuBox } from "./styled-components/SideMenuStyled";
 
 class SideMenu extends React.Component {
   render() {
     return (
-      <aside className="menu">
+      <SideMenuBox className="menu">
         <p className="menu-label">General</p>
         <ul className="menu-list">
           <li>
@@ -56,7 +57,7 @@ class SideMenu extends React.Component {
             <a>Balance</a>
           </li>
         </ul>
-      </aside>
+      </SideMenuBox>
     );
   }
 }

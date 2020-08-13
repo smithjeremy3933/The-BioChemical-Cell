@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import styled from "styled-components";
 
 class Header extends React.Component {
   renderAuthBtns() {
@@ -68,7 +69,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <NavBox className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="navbar-item" href="https://bulma.io">
             <img
@@ -96,10 +97,17 @@ class Header extends React.Component {
             <div className="navbar-item">{this.renderAuthBtns()}</div>
           </div>
         </div>
-      </nav>
+      </NavBox>
     );
   }
 }
+
+const NavBox = styled.nav`
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+`;
 
 function mapStateToProps(state) {
   return { authenticated: state.auth.authenticated };

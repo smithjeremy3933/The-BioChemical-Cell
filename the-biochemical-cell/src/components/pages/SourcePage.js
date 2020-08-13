@@ -9,7 +9,9 @@ class SourcePage extends React.Component {
         <div className="column is-one-fifth">
           <SideMenu />
         </div>
-        <div className="column">Source Page Content</div>
+        <div className="column" style={{ marginTop: 52 }}>
+          Source Page Content
+        </div>
       </div>
     );
   }

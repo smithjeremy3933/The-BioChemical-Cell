@@ -1,14 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as Scroll from "react-scroll";
-import {
-  Link as ScrollLink,
-  Element,
-  Events,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll";
+import { AminoBox, InnerScroll } from "../styled-components/AminoAcidStyle";
+import { Link as ScrollLink, Element, Events, scrollSpy } from "react-scroll";
 import requireAuth from "../requireAuth";
 import SideMenu from "../SideMenu";
 import { getAllAminoAcids } from "../../actions";
@@ -46,7 +39,7 @@ class AminoAcidPage extends React.Component {
 
   renderAminoAcidClassBox(rGroupClass) {
     return (
-      <div className="box" style={{ width: 900 }}>
+      <AminoBox className="box">
         <h1>{rGroupClass}</h1>
         <div id="scrollBox">
           <Element
@@ -61,12 +54,12 @@ class AminoAcidPage extends React.Component {
               // marginBottom: '100px'
             }}
           >
-            <div style={{ display: "flex" }} className="innerSrollBox">
+            <InnerScroll className="innerSrollBox">
               {this.renderAminoAcidCards(rGroupClass)}
-            </div>
+            </InnerScroll>
           </Element>
         </div>
-      </div>
+      </AminoBox>
     );
   }
 
@@ -85,10 +78,20 @@ class AminoAcidPage extends React.Component {
       console.log(filteredRGroupArr);
       return filteredRGroupArr.map((aminoAcid) => {
         return (
-          <div key={aminoAcid.id}>
+          <div style={{ marginRight: 20 }} key={aminoAcid.id}>
             <AminoAcidCard
+              id={aminoAcid.id}
               name={aminoAcid.name}
               rGroup={aminoAcid.r_groupClass}
+              abbrevName={aminoAcid.abbreviatedName}
+              symbolName={aminoAcid.symbolName}
+              imageUrl={aminoAcid.imageUrl}
+              percentOccurInProts={aminoAcid.occurenceInProteins}
+              molecularWeight={aminoAcid.molecularWeight}
+              pI={aminoAcid.pI}
+              pk1_COOH={aminoAcid.pk1_COOH}
+              pk2_NH3={aminoAcid.pk2_NH3}
+              pkR={aminoAcid.pkR}
             />
           </div>
         );
@@ -101,19 +104,21 @@ class AminoAcidPage extends React.Component {
   render() {
     console.log(this.props.amino);
     return (
-      <div className="columns">
+      <div className="columns is-mobile">
         <div className="column is-one-fifth">
           <SideMenu />
         </div>
-        <div className="column">
-          <h1>Amino Acid Page</h1>
-          {this.renderAminoAcidClassBox(NONPOL_ALIPHATIC)}
-          <div className="columns">
-            <div className="column">
-              {this.renderAminoAcidClassBox(AROMATIC)}
-              <div className="columns">
-                <div className="column">
-                  {this.renderAminoAcidClassBox(POL_UNCHARGED)}
+        <div className="column" style={{ marginTop: 52 }}>
+          <div className="container">
+            <h1>Amino Acid Page</h1>
+            {this.renderAminoAcidClassBox(NONPOL_ALIPHATIC)}
+            <div className="columns">
+              <div className="column">
+                {this.renderAminoAcidClassBox(AROMATIC)}
+                <div className="columns">
+                  <div className="column">
+                    {this.renderAminoAcidClassBox(POL_UNCHARGED)}
+                  </div>
                 </div>
               </div>
             </div>
