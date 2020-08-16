@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { AminoBox, InnerScroll } from "../styled-components/AminoAcidStyle";
-import { Link as ScrollLink, Element, Events, scrollSpy } from "react-scroll";
 import requireAuth from "../requireAuth";
 import SideMenu from "../SideMenu";
 import { getAllAminoAcids } from "../../actions";
@@ -17,50 +15,6 @@ import {
 class AminoAcidPage extends React.Component {
   componentDidMount() {
     this.props.getAllAminoAcids();
-
-    Events.scrollEvent.register("begin", function () {
-      console.log("begin", arguments);
-    });
-
-    Events.scrollEvent.register("end", function () {
-      console.log("end", arguments);
-    });
-
-    scrollSpy.update();
-  }
-
-  // scrollToTop() {
-  //   scroll.scrollToTop;
-  // }
-
-  // scrollToBottom() {
-  //   scroll.scrollToBottom;
-  // }
-
-  renderAminoAcidClassBox(rGroupClass) {
-    return (
-      <AminoBox className="box">
-        <h1>{rGroupClass}</h1>
-        <div id="scrollBox">
-          <Element
-            name="test7"
-            className="element"
-            id="containerElement"
-            style={{
-              display: "flex",
-              position: "relative",
-              height: "500px",
-              overflow: "scroll",
-              // marginBottom: '100px'
-            }}
-          >
-            <InnerScroll className="innerSrollBox">
-              {this.renderAminoAcidCards(rGroupClass)}
-            </InnerScroll>
-          </Element>
-        </div>
-      </AminoBox>
-    );
   }
 
   filterByRGroupClass(aminos, rGroupClass) {
@@ -79,6 +33,9 @@ class AminoAcidPage extends React.Component {
       return filteredRGroupArr.map((aminoAcid) => {
         return (
           <div style={{ marginRight: 20 }} key={aminoAcid.id}>
+            <h1>
+              <strong>{rGroupClass}</strong>
+            </h1>
             <AminoAcidCard
               id={aminoAcid.id}
               name={aminoAcid.name}
@@ -97,7 +54,11 @@ class AminoAcidPage extends React.Component {
         );
       });
     } else {
-      return <div>Loading...</div>;
+      return (
+        <progress class="progress is-large is-info" max="100">
+          60%
+        </progress>
+      );
     }
   }
 
@@ -109,20 +70,10 @@ class AminoAcidPage extends React.Component {
           <SideMenu />
         </div>
         <div className="column" style={{ marginTop: 52 }}>
-          <div className="container">
-            <h1>Amino Acid Page</h1>
-            {this.renderAminoAcidClassBox(NONPOL_ALIPHATIC)}
-            <div className="columns">
-              <div className="column">
-                {this.renderAminoAcidClassBox(AROMATIC)}
-                <div className="columns">
-                  <div className="column">
-                    {this.renderAminoAcidClassBox(POL_UNCHARGED)}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h1>
+            <b>Amino Acids!</b>
+          </h1>
+          {this.renderAminoAcidCards(NONPOL_ALIPHATIC)}
         </div>
       </div>
     );

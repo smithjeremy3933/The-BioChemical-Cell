@@ -9,4 +9,9 @@ export const SideMenuBox = styled.aside`
   border-right: solid;
   border-color: white;
   border-width: 4px;
+  padding: 3%;
+`;
+
+export const LinkText = styled.b`
+  font-size: 200%;
 `;

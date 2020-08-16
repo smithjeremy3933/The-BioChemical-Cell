@@ -1,6 +1,16 @@
 import history from "../history";
 import backend from "../apis/backend";
-import { AUTH_USER, AUTH_ERROR, FETCH_ALL_AMINOS, FETCH_AMINO } from "./types";
+import news from "../apis/news";
+import { newsApiKey } from "../config/keys";
+import {
+  AUTH_USER,
+  AUTH_ERROR,
+  FETCH_ALL_AMINOS,
+  FETCH_AMINO,
+  FETCH_BIO_NEWS,
+} from "./types";
+
+// AUTH API
 
 export const signup = (formValues) => async (dispatch) => {
   try {
@@ -31,6 +41,8 @@ export const signout = () => {
   };
 };
 
+// AMINO ACID API
+
 export const getAllAminoAcids = () => async (dispatch) => {
   const response = await backend.get("/api/aminoacids/allaminoacids", {
     headers: {
@@ -47,4 +59,17 @@ export const getAminoAcid = (id) => async (dispatch) => {
     },
   });
   dispatch({ type: FETCH_AMINO, payload: response.data });
+};
+
+// NEWS API
+
+export const getNews = () => async (dispatch) => {
+  const response = await news.get(``, {
+    params: {
+      apiKey: newsApiKey,
+      q: "biology",
+      sortBy: "relevancy",
+    },
+  });
+  dispatch({ type: FETCH_BIO_NEWS, payload: response.data.articles });
 };

@@ -7,6 +7,7 @@ import Signup from "./auth/Signup";
 import HomePage from "./pages/HomePage";
 import SourcePage from "./pages/SourcePage";
 import AminoAcidPage from "./pages/AminoAcidPage";
+import ArticlePage from "./pages/ArticlePage";
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -19,6 +20,11 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={Signup} />
             <Route path="/homepage" exact component={HomePage} />
+            <Route
+              path="/homepage/:publishedAt"
+              exact
+              component={ArticlePage}
+            />
             <Route path="/aminoacid" exact component={AminoAcidPage} />
             <Route path="/sources" exact component={SourcePage} />
             <Route path="/signout" exact component={Signout} />

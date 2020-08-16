@@ -52,7 +52,7 @@ class Header extends React.Component {
           <Link to="/sources" className="navbar-item">
             Sources
           </Link>
-          <div className="navbar-item has-dropdown is-hoverable">
+          {/* <div className="navbar-item has-dropdown is-hoverable">
             <a className="navbar-link">More</a>
             <div className="navbar-dropdown">
               <a className="navbar-item">About</a>
@@ -61,7 +61,7 @@ class Header extends React.Component {
               <hr className="navbar-divider" />
               <a className="navbar-item">Report an issue</a>
             </div>
-          </div>
+          </div> */}
         </div>
       );
     }

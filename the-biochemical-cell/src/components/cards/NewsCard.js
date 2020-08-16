@@ -1,17 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-const AminoAcidCard = (props) => {
+const NewsCard = (props) => {
   return (
     <div className="box">
       <article className="media">
         <div className="media-left">
-          <figure className="image">
+          <figure className="image is-64x64">
             <img
-              style={{ height: 250, width: 250 }}
               src={
                 !props.imageUrl
-                  ? "https://bulma.io/images/placeholders/480x480.png"
+                  ? "https://bulma.io/images/placeholders/128x128.png"
                   : props.imageUrl
               }
               alt="Image"
@@ -21,21 +21,24 @@ const AminoAcidCard = (props) => {
         <div className="media-content">
           <div className="content">
             <strong>
-              <h1>
-                {props.name} | {props.abbrevName} | {props.symbolName}
-              </h1>
+              <a href={props.url} target="_blank">
+                {props.title}
+              </a>
             </strong>
             <hr style={{ margin: 3 }} />
             <p>
+              <small>Author: {!props.author ? "N/A" : props.author} | </small>
+              <small>Source: {props.sourceName} | </small>
+              <small>Date Published: {props.publishedAt}</small>
               <br />
-              {/* {props.description} */}
+              {props.description}
             </p>
           </div>
           <nav className="level is-mobile">
             <div className="level-left">
-              {/* <Link to={`/homepage/${props.publishedAt}`} className="button">
-          VIEW
-        </Link> */}
+              <Link to={`/homepage/${props.publishedAt}`} className="button">
+                VIEW
+              </Link>
               <a className="level-item" aria-label="reply">
                 <span className="icon is-small">
                   <i className="fas fa-reply" aria-hidden="true"></i>
@@ -59,4 +62,4 @@ const AminoAcidCard = (props) => {
   );
 };
 
-export default connect(null)(AminoAcidCard);
+export default connect(null)(NewsCard);
